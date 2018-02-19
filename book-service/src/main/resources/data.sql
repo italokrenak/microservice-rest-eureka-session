@@ -1,0 +1,1 @@
+INSERT INTO book(id, title, author) VALUES(1, 'Annuakis', 'Zacarias Sith');
