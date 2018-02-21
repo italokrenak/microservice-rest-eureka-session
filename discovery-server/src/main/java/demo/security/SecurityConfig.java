@@ -28,7 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.sessionManagement().
 				sessionCreationPolicy(SessionCreationPolicy.ALWAYS).and()
-			.requestMatchers().antMatchers("/eureka/**").and()
+			.requestMatchers()
+				.antMatchers("/eureka/**").and()
 			.authorizeRequests()
 				.antMatchers("/eureka/**").hasRole("SYSTEM")
 				.anyRequest().denyAll().and()
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.NEVER).and()
 				.httpBasic().disable()
 					.authorizeRequests()
-						.antMatchers(HttpMethod.GET, "/").hasRole("ADMIN")
+						.antMatchers(HttpMethod.GET, "/").hasAnyRole("ADMIN", "SYSTEM")
 						.antMatchers("/info", "/health").authenticated()
 						.anyRequest().denyAll().and()
 					.csrf().disable();
